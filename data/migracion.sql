@@ -1,6 +1,6 @@
-CREATE DATABASE tutorial_crud;
+CREATE DATABASE crud_php;
 
-use tutorial_crud;
+use crud_php;
 
 CREATE TABLE alumnos (
   id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

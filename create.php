@@ -1,3 +1,30 @@
+<?php
+
+if (isset($_POST['submit'])) {
+
+  // incluimos añgun posible error
+  $resultado = [
+    'error' => false,
+    'mensaje' => 'Usuario agregado con éxito'
+  ];
+
+  // agregamos el array de configuracion del archivo
+  $config = include 'config.php';
+
+  try {
+    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+    // Código que insertará un alumno
+
+  } catch(PDOException $error) {
+    $resultado['error'] = true;
+    $resultado['mensaje'] = $error->getMessage();
+  }
+}
+
+?>
+
 <?php include "templates/header.php"; ?>
 
 <div class="container">

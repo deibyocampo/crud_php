@@ -1,31 +1,54 @@
 <?php
+  if (isset($_POST['submit'])) {
+    $resultado = [
+      'error' => false,
+      'mensaje' => 'El alumno ' . $_POST['nombre'] . ' ha sido agregado con éxito' 
+    ];
 
-if (isset($_POST['submit'])) {
+    $config = include 'config.php';
 
-  // incluimos añgun posible error
-  $resultado = [
-    'error' => false,
-    'mensaje' => 'Usuario agregado con éxito'
-  ];
+    try {
+      $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+      $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-  // agregamos el array de configuracion del archivo
-  $config = include 'config.php';
+      $alumno = array(
+        "nombre"   => $_POST['nombre'],
+        "apellido" => $_POST['apellido'],
+        "email"    => $_POST['email'],
+        "edad"     => $_POST['edad'],
+      );
+      
+      $consultaSQL = "INSERT INTO alumnos (nombre, apellido, email, edad)";
+      $consultaSQL .= "values (:" . implode(", :", array_keys($alumno)) . ")";
+      
+      $sentencia = $conexion->prepare($consultaSQL);
+      $sentencia->execute($alumno);
 
-  try {
-    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-    // Código que insertará un alumno
-
-  } catch(PDOException $error) {
-    $resultado['error'] = true;
-    $resultado['mensaje'] = $error->getMessage();
-  }
+    } catch(PDOException $error) {
+      $resultado['error'] = true;
+      $resultado['mensaje'] = $error->getMessage();
+    }
 }
-
 ?>
 
 <?php include "templates/header.php"; ?>
+
+<?php
+// aviso sobre si el alumno se creo o hubo un error 
+if (isset($resultado)) {
+  ?>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
+          <?= $resultado['mensaje'] ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php
+}
+?>
 
 <div class="container">
   <div class="row">

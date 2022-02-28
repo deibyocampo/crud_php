@@ -22,7 +22,6 @@
           <label for="edad">Edad</label>
           <input type="text" name="edad" id="edad" class="form-control" placeholder="Edad">
         </div>
-        
         <div class="form-group">
           <input type="submit" name="submit" class="btn btn-primary" value="Enviar">
           <a class="btn btn-primary" href="index.php">Regresar al inicio</a>

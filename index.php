@@ -8,6 +8,13 @@ try {
   $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
   $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
+  // formulario donde enviara el apellido del alumno que introduzcamos en la casilla de busqueda
+  if (isset($_POST['apellido'])) {
+    $consultaSQL = "SELECT * FROM alumnos WHERE apellido LIKE '%" . $_POST['apellido'] . "%'";
+  } else {
+    $consultaSQL = "SELECT * FROM alumnos";
+  }
+
   // consulta MySQL que usaremos para obtener la lista de alumnos.
   $consultaSQL = "SELECT * FROM alumnos";
 
@@ -21,6 +28,10 @@ try {
 } catch(PDOException $error) {
   $error = $error->getMessage();
 }
+
+// modificamos el titulo del formulario que nos indique el apellido que estamos buscando
+$titulo = isset($_POST['apellido']) ? 'Lista de alumnos (' . $_POST['apellido'] . ')' : 'Lista de alumnos';
+
 ?>
 
 <?php include "templates/header.php"; ?>
@@ -43,7 +54,6 @@ if ($error) {
 ?>
 
 <!-- codigo del boton para crear un alumno en la base de datos -->
-<!-- boton de busqueda que nos permite buscar usuarios por apellido -->
 <div class="container">
   <div class="row">
     <div class="col-md-12">

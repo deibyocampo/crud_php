@@ -42,12 +42,20 @@ if ($error) {
 }
 ?>
 
-<!-- codigo del boton para crear un boton -->
+<!-- codigo del boton para crear un alumno en la base de datos -->
+<!-- boton de busqueda que nos permite buscar usuarios por apellido -->
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <a href="create.php"  class="btn btn-primary mt-4">Crear alumno</a>
+      <a href="crear.php" class="btn btn-primary mt-4">Crear alumno</a>
       <hr>
+    <!-- boton de busqueda que nos permite buscar usuarios por apellido -->
+      <form method="post" class="form-inline">
+        <div class="form-group mr-3">
+          <input type="text" id="apellido" name="apellido" placeholder="Buscar por apellido" class="form-control">
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Ver Resultados</button>
+      </form>
     </div>
   </div>
 </div>

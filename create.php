@@ -4,7 +4,7 @@
   if (isset($_POST['submit'])) {
     $resultado = [
       'error' => false,
-      'mensaje' => 'El alumno ' . $_POST['nombre'] . ' ha sido agregado con éxito' 
+      'mensaje' => 'El alumno ' . escapar($_POST['nombre']) . ' ha sido agregado con éxito' 
     ];
 
     $config = include 'config.php';

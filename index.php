@@ -16,7 +16,6 @@ try {
   }
 
   // consulta MySQL que usaremos para obtener la lista de alumnos.
-  $consultaSQL = "SELECT * FROM alumnos";
 
   $sentencia = $conexion->prepare($consultaSQL);
   $sentencia->execute();
@@ -83,6 +82,7 @@ if ($error) {
             <th>Apellido</th>
             <th>Email</th>
             <th>Edad</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -96,6 +96,10 @@ if ($error) {
                 <td><?php echo escapar($fila["apellido"]); ?></td>
                 <td><?php echo escapar($fila["email"]); ?></td>
                 <td><?php echo escapar($fila["edad"]); ?></td>
+                <td>
+                  <a href="<?= 'borrar.php?id=' . escapar($fila["id"]) ?>">🗑️Borrar</a>
+                  <a href="<?= 'editar.php?id=' . escapar($fila["id"]) ?>">✏️Editar</a>
+                </td>
               </tr>
               <?php
             }

@@ -22,7 +22,27 @@ if(isset($_POST['submit'])) {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        
+    /* usaremos la sentencia SQL UPDATE para actualizar los valores del alumno cuyo id
+    corresponde con lo que estamos editando */
+        $alumno = [
+            "id"        => $_GET['id'],
+            "nombre"    => $_POST['nombre'],
+            "apellido"  => $_POST['apellido'],
+            "email"     => $_POST['email'],
+            "edad"      => $_POST['edad']
+          ];
+          
+        $consultaSQL = "UPDATE alumnos SET
+              nombre = :nombre,
+              apellido = :apellido,
+              email = :email,
+              edad = :edad,
+              updated_at = NOW()
+              WHERE id = :id";
+          
+        $consulta = $conexion->prepare($consultaSQL);
+        $consulta->execute($alumno);
+
     } catch(PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $error->getMessage();

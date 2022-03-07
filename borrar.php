@@ -19,7 +19,7 @@ try{
   $sentencia->execute();
 
   header('Location: /index.php');
-  
+
 }catch(PDOException $error){
     $resultado['error'] = true;
     $resultado['mensaje'] = $error->getMessage();
@@ -28,4 +28,15 @@ try{
 
 <?php require "templates/header.php"; ?>
 <!-- código de la página -->
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger" role="alert">
+        <?= $resultado['mensaje'] ?>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php require "templates/footer.php"; ?>

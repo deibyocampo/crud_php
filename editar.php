@@ -16,6 +16,19 @@ if (!isset($_GET['id'])) {
     $resultado['mensaje'] = 'El alumno no existe';
 }
 
+ // Conectamos ala base de datos y actualizamos el alumno con los nuevos datos
+if(isset($_POST['submit'])) {
+    try {
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname' . $config['db']['name'];
+        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+        
+    } catch(PDOException $error) {
+        $resultado['error'] = true;
+        $resultado['mensaje'] = $error->getMessage();
+    }
+}
+
 try{
     $dns = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);

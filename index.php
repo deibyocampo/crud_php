@@ -56,7 +56,7 @@ if ($error) {
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <a href="crear.php" class="btn btn-primary mt-4">Crear alumno</a>
+      <a href="create.php" class="btn btn-primary mt-4">Crear alumno</a>
       <hr>
     <!-- boton de busqueda que nos permite buscar usuarios por apellido -->
       <form method="post" class="form-inline">
